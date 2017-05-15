@@ -1,0 +1,116 @@
+<html>
+  <head>
+    <!--Load the AJAX API-->
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/canvasjs/1.7.0/canvasjs.min.js"></script>
+<link rel="stylesheet" type="text/css" href="style/style.css" />	
+	<script type="text/javascript">
+        var year = [];
+        var number = [];
+
+ function fetch_data() {
+    var jsonData = $.ajax({
+      url: 'year_query.php',
+        dataType:"json",
+        async: false,
+      success: function(jsonData)
+        {
+                for(var i=0; i<16; i++)
+                {
+                        year[i] = jsonData[i+1][0];
+                        number[i] = jsonData[i+1][1];
+                }
+                //console.log(jsonData[1][0]);
+                console.log(year);
+                console.log(number);
+        }
+      }).responseText;
+}
+
+ window.onload = function () {
+
+fetch_data();
+    
+var chart = new CanvasJS.Chart("chartContainer",
+    {
+      title:{
+        text: "Number of Employees hired in every years",
+        fontFamily: "Impact",
+        fontWeight: "normal"
+      },
+
+      legend:{
+        verticalAlign: "bottom",
+        horizontalAlign: "center"
+      },
+      data: [
+      {
+        //startAngle: 45,
+       indexLabelFontSize: 20,
+       indexLabelFontFamily: "Garamond",
+       indexLabelFontColor: "darkgrey",
+       indexLabelLineColor: "darkgrey",
+       indexLabelPlacement: "outside",
+       type: "doughnut",
+       showInLegend: true,
+       dataPoints: [
+       {  y: (number[0]*100)/300024, legendText:year[0]+" - "+number[0]+"\n" , indexLabel: year[0]+" - "+((number[0]*100)/300024).toFixed(2)+"%" },
+       {  y: (number[1]*100)/300024, legendText:year[1]+" - "+number[1]+"\n" , indexLabel: year[1]+" -  "+((number[1]*100)/300024).toFixed(2)+"%" },
+	{  y: (number[2]*100)/300024, legendText:year[2]+" - "+number[2]+"\n" , indexLabel: year[2]+" - "+((number[2]*100)/300024).toFixed(2)+"%" },
+	{  y: (number[3]*100)/300024, legendText:year[3]+" - "+number[3]+"\n" , indexLabel: year[3]+" - "+((number[3]*100)/300024).toFixed(2)+"%" },
+	{  y: (number[4]*100)/300024, legendText:year[4]+" - "+number[4]+"\n" , indexLabel: year[4]+" - "+((number[4]*100)/300024).toFixed(2)+"%" },
+	{  y: (number[5]*100)/300024, legendText:year[5]+" - "+number[5]+"\n" , indexLabel: year[5]+" - "+((number[5]*100)/300024).toFixed(2)+"%" },
+	{  y: (number[6]*100)/300024, legendText:year[6]+" - "+number[6]+"\n" , indexLabel: year[6]+" - "+((number[6]*100)/300024).toFixed(2)+"%" },
+       {  y: (number[7]*100)/300024, legendText:year[7]+" - "+number[7]+"\n" , indexLabel: year[7]+" -  "+((number[7]*100)/300024).toFixed(2)+"%" },
+       {  y: (number[8]*100)/300024, legendText:year[8]+" - "+number[8]+"\n" , indexLabel: year[8]+" -  "+((number[8]*100)/300024).toFixed(2)+"%" },
+       {  y: (number[9]*100)/300024, legendText:year[9]+" - "+number[9]+"\n" , indexLabel: year[9]+" -  "+((number[9]*100)/300024).toFixed(2)+"%" },
+       {  y: (number[10]*100)/300024, legendText:year[10]+" - "+number[10]+"\n" , indexLabel: year[10]+" -  "+((number[10]*100)/300024).toFixed(2)+"%" },
+       {  y: (number[11]*100)/300024, legendText:year[11]+" - "+number[11]+"\n" , indexLabel: year[11]+" -  "+((number[11]*100)/300024).toFixed(2)+"%" },
+       {  y: (number[12]*100)/300024, legendText:year[12]+" - "+number[12]+"\n" , indexLabel: year[12]+" -  "+((number[12]*100)/300024).toFixed(2)+"%" },
+       {  y: (number[13]*100)/300024, legendText:year[13]+" - "+number[13]+"\n" , indexLabel: year[13]+" -  "+((number[13]*100)/300024).toFixed(2)+"%" },
+       {  y: (number[14]*100)/300024, legendText:year[14]+" - "+number[14]+"\n" , indexLabel: year[14]+" -  "+((number[14]*100)/300024).toFixed(2)+"%" },
+       {  y: (number[15]*100)/300024, legendText:year[15]+" - "+number[15]+"\n" , indexLabel: year[15]+" -  "+((number[15]*100)/300024).toFixed(2)+"%" }
+       ]
+     }
+     ]
+   });
+
+    chart.render();
+  }
+</script>
+
+ </head>
+	<body> 
+   	 <div id="main">
+    <div id="header">
+      <div id="logo">
+        <div id="logo_text">
+          <!-- class="logo_colour", allows you to change the colour of the text -->
+          <h1><a href="index.html">Employee<span class="logo_colour">Data</span></a></h1>
+       </div>
+      </div>
+<div id="menubar">
+        <ul id="menu">
+          <!-- put class="selected" in the li tag for the selected page - to highlight which page you're on -->
+          <li><a href="gender.html">Employees</a></li> <!-- M vs F column Chart gender.html-->
+          <li><a href="department.html">Department </a></li> <!-- Pie chart department.html -->
+          <li><a href="title.html">Employees Job Title</a></li> <!-- title.html -->
+          <li><a href="year.html">Yearly Hired</li></a> <!-- year.html -->
+	  <li><a href="http://ec2-34-224-7-47.compute-1.amazonaws.com:8080/">Jenkins</li></a>
+	  <li><a href="http://ec2-34-224-7-47.compute-1.amazonaws.com:3000/">Log Out</li></a>
+	 </ul>
+      </div>
+
+	<div>
+	<br><br><br><br>
+	<center> <div id="chartContainer" style="height: 500px; width: 50%;"></div> </center>
+     </div>
+	</div>
+   </div>
+        </body>
+  <script type="text/javascript">
+      
+    </script>
+</html>
+

@@ -1,0 +1,105 @@
+<html>
+  <head>
+    <!--Load the AJAX API-->
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/canvasjs/1.7.0/canvasjs.min.js"></script>
+<link rel="stylesheet" type="text/css" href="style/style.css" />	
+	<script type="text/javascript">
+ 
+        var title = [];
+        var number = [];
+
+ function fetch_data() {
+    var jsonData = $.ajax({
+      url: 'title_query.php',
+        dataType:"json",
+        async: false,
+      success: function(jsonData)
+        {
+                for(var i=0; i<7; i++)
+                {
+                        title[i] = jsonData[i+1][0];
+                        number[i] = jsonData[i+1][1];
+                }
+                //console.log(jsonData[1][0]);
+                console.log(title);
+                console.log(number);
+        }
+      }).responseText;
+}
+
+ window.onload = function () {
+	fetch_data();
+
+    var chart = new CanvasJS.Chart("chartContainer",
+    {
+      title:{
+       text: "Employee vs Job Title"
+      },
+      axisX: {
+        title:"Job Title",
+        maximum: 8
+      },
+      axisY: {
+        title:"Number of Employees"
+      },
+       data: [
+      {
+        type: "bubble",
+        legendText: "",
+        showInLegend: false,
+        legendMarkerType: "circle",
+ toolTipContent: "<strong>{name}</strong> <br/> ID: {x} <br/> Number of Employees: {z} ",
+     dataPoints: [
+     { x: 1, y: 2, z:number[0] , name: title[0]},
+     { x: 2, y: 8, z:number[1] , name: title[1]},
+     { x: 3, y: 1, z:number[2] , name: title[2]},
+     { x: 4, y: 6, z:number[3] , name: title[3]},
+     { x: 5, y: 5, z:number[4] , name: title[4]},
+     { x: 6, y: 7, z:number[5] , name: title[5]},
+     { x: 7, y: 4, z:number[6] , name: title[6]}
+     ]
+   }
+   ]
+ });
+
+chart.render();
+}
+</script>
+
+  </head>
+	<body> 
+   	 <div id="main">
+    <div id="header">
+      <div id="logo">
+        <div id="logo_text">
+          <!-- class="logo_colour", allows you to change the colour of the text -->
+          <h1><a href="index.html">Employee<span class="logo_colour">Data</span></a></h1>
+       </div>
+      </div>
+<div id="menubar">
+        <ul id="menu">
+          <!-- put class="selected" in the li tag for the selected page - to highlight which page you're on -->
+          <li><a href="gender.html">Employees</a></li> <!-- M vs F column Chart gender.html-->
+          <li><a href="department.html">Department </a></li> <!-- Pie chart department.html -->
+          <li><a href="title.html">Employees Job Title</a></li> <!-- title.html -->
+          <li><a href="year.html">Yearly Hired</li></a> <!-- year.html -->
+	  <li><a href="http://ec2-34-224-7-47.compute-1.amazonaws.com:8080/">Jenkins</li></a>
+	  <li><a href="http://ec2-34-224-7-47.compute-1.amazonaws.com:3000/">Log Out</li></a>           
+        </ul>
+      </div>
+
+	<div>
+	<br><br><br><br>
+	<center> <div id="chartContainer" style="height: 500px; width: 50%;"></div> </center>
+     </div>
+	</div>
+   </div>
+        </body>
+  <script type="text/javascript">
+      
+    </script>
+</html>
+
+
