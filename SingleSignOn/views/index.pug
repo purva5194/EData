@@ -1,0 +1,50 @@
+extends layout
+
+block content
+  doctype html
+  html
+   head
+    meta(charset='UTF-8')
+    |   
+    title EData
+    |   
+    |   
+    |   
+    |       
+    style
+        include style.css
+  body
+    #clouds
+      .cloud.x1
+      // Time for multiple clouds to dance around
+      .cloud.x2
+      | &#x9;
+      .cloud.x3
+      |     
+      .bottom
+        h3
+          font(color='#2F84C8', size='7', style='font-family:Comic Sans MS', ;='') Welcome to EData
+      | &#x9;
+      .cloud.x4
+      | &#x9;
+      .cloud.x5
+    |  
+    .container
+      #login
+        br
+        br
+        br
+        br
+        br
+        br
+        br
+        br
+        a(href="/login")
+            p.btn
+                input(type='submit', value='Log In')  
+        br
+        br
+        br
+        br    
+        img(src="/emp.png", alt="Smiley face")
+      // end login
